@@ -1,42 +1,31 @@
-import { AgmCoreModule } from '@agm/core';
+import { HomePageModule } from './pages/home/home.module';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { StatusBar } from '@ionic-native/status-bar';
-import { IonicApp, IonicModule } from 'ionic-angular';
-import { Config } from '../config';
+import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 
-import { ComponentsModule } from '../pages/components/components.module';
-import { GoogleMapsModule } from '../pages/google-maps/google-maps.module';
-import { HomeModule } from '../pages/home/home.module';
-import { SlideBoxModule } from '../pages/slide-box/slide-box.module';
-import { WordpressModule } from '../pages/wordpress/wordpress.module';
-import { MyApp } from './app.component';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-	declarations: [
-		MyApp
-	],
-	imports: [
-		BrowserModule,
-		HttpModule,
-		IonicModule.forRoot(MyApp),
-		AgmCoreModule.forRoot(),
-
-		ComponentsModule,
-		GoogleMapsModule,
-		HomeModule,
-		SlideBoxModule,
-		WordpressModule
-	],
-	bootstrap: [IonicApp],
-	entryComponents: [
-		MyApp
-	],
-	providers: [
-		Config,
-		StatusBar
-	]
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [
+	BrowserModule,
+	IonicModule.forRoot(),
+	AppRoutingModule,
+	PipesModule,
+	HomePageModule
+],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
